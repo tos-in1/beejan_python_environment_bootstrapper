@@ -180,9 +180,9 @@ Using ${VAR} instead of $VAR ensures consistent behavior, avoids parsing errors,
 ### Conclusion 
 This project started as a simple script, but it evolved into a fully reusable Python environment bootstrapper that removes the repetitive pain of manual setup. From virtual environment management to pip upgrades, package installation, colorful feedback, and logging — everything is now automated with a single command.
 
-There could be plenty of room for future improvements, but it already achieves its main goal: 
+There could be plenty of room for future improvements, but it already achieves its main goal:
 
-#### Making project setup fast, consistent, and effortless!
+Making project setup fast, consistent, and effortless!
 
 
 
