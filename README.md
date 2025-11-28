@@ -120,8 +120,61 @@ This script ensures that every new project environment is ready in minutes, so e
 
 <img width="1301" height="770" alt="Image" src="https://github.com/user-attachments/assets/45d65d48-2fe2-4ef2-aa54-60fed2937c95" />
 
+### Challenges Faced and Lessons Learnt
+
+#### 1. Making the Script Reusable for Any Project
+
+Originally, the script assumed a fixed project folder name, which made it unusable outside one specific project.
+
+<img width="1106" height="587" alt="Image" src="https://github.com/user-attachments/assets/339aa857-348c-44a6-894a-1fa28f27de8e" />
+
+To solve this, I updated the script to use:
+
+           DIRECTORY="$(pwd)"
+
+No more hard-coded paths. I removed the old directory-creation function and now everything adapts to whatever folder the user is in.
+
+#### Lesson learnt:
+Good automation scripts should be portable and flexible, not tied to a single setup or file structure.
 
 
+#### 2. Environment Refused to Activate After running setup.sh
+
+After running:
+
+           ./setup.sh
+
+the virtual environment didn’t activate as expected.
+
+<img width="1138" height="601" alt="Image" src="https://github.com/user-attachments/assets/9d13dc24-1b1e-44e4-b334-6ef8fc378efd" />
+
+I have to run setup.sh using:
+
+           . ./setup.sh
+
+
+before it worked properly.
+
+#### Lesson learnt:
+Scripts executed with `./file.sh` run in a subshell, so environment changes don’t carry over
+
+#### 3. Terminal Colors Not Displaying Correctly
+
+One surprising challenge I faced was that none of the colored output messages were showing in my terminal. At first, I thought my Ubuntu terminal didn’t support ANSI color codes, but the real problem was a simple syntax mistake.
+
+<img width="1102" height="618" alt="Image" src="https://github.com/user-attachments/assets/6f43cc80-9df3-4c1c-adb5-471404543a37" />
+
+I wrote my color variables like this:
+
+           ($COLOUR)
+           
+Instead of the correct Bash variable format:
+
+           ${COLOUR}
+
+#### Lesson Learnt
+Bash is very strict with variable syntax, especially inside echo statements.
+Using ${VAR} instead of $VAR ensures consistent behavior, avoids parsing errors, and makes color formatting work across different terminals.
 
 
 
