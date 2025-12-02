@@ -184,5 +184,13 @@ There could be plenty of room for future improvements, but it already achieves i
 
 Making project setup fast, consistent, and effortless!
 
+### Future Enhancement
+1. Install Modern DE Tools:
+Add optional setup for Airflow, Docker, and essential code-quality tools to streamline project initialization.
+2. CI Testing & GitHub Actions:
+Introduce automated linting, testing, and environment checks triggered on every push or pull request.
+3. Enhanced Logging System:
+Implement structured log levels and timestamped logs for clearer debugging and better traceability.
+
 
 
