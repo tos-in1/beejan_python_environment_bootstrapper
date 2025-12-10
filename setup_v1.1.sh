@@ -186,6 +186,9 @@ requests
 sqlalchemy
 psycopg2-binary
 python-dotenv
+boto3
+pyarrow
+pydantic
 EOF
 
                 logging_msg "SUCCESS" "$REQ_FILE created successfully! ✅"
@@ -218,10 +221,10 @@ gitignore
 req_package
 install_package
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>> ALL DONE!!  <<<<<<<<<<<<<<<<<<<<<<<<<
 
-MESSAGE="Setup completed successfully!!"
-echo -e "${BLUE}$MESSAGE${RESET}✅"
-logging_msg "$MESSAGE"
+logging_msg "SUCCESS" "Setup completed successfully!! 🥳"
+logging_msg "INFO" "Logs saved to log file"
 
 
 
