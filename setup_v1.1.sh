@@ -9,7 +9,7 @@ DIRECTORY="$(pwd)"
 
 # >>>>>>>>>>>>>>>>>>> Create Log File In Directory <<<<<<<<<<<<<<<<<<
 
-LOG_FILE="$DIRECTORY/logs/setup.log" # this would create a new setup.log
+LOG_FILE="$DIRECTORY/setup.log" # this would create a new setup.log
 
 # Defining color variables
 GREEN="\e[32m"
@@ -225,7 +225,4 @@ install_package
 
 logging_msg "SUCCESS" "Setup completed successfully!! 🥳"
 logging_msg "INFO" "Logs saved to log file"
-
-
-
 
