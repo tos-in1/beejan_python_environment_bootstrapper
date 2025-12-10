@@ -1,0 +1,12 @@
+2025-11-28 05:59:55 - Virtual environment created and activated
+2025-11-28 05:59:55 - Upgrading pip to the latest version.....
+2025-11-28 05:59:57 - pip was upgraded sucessfully
+2025-11-28 05:59:57 - .env successfully created!
+2025-11-28 05:59:57 - README.md created successfully!
+2025-11-28 05:59:57 - Creating .gitignore...
+2025-11-28 05:59:57 - .gitignore created successfully!
+2025-11-28 05:59:57 - Creating /home/testing/beejan_technology/python_projects/beejan_python_environment_bootstrapper/req_package.txt file
+2025-11-28 05:59:57 - /home/testing/beejan_technology/python_projects/beejan_python_environment_bootstrapper/req_package.txt created successfully!
+2025-11-28 05:59:57 - Installing packages from /home/testing/beejan_technology/python_projects/beejan_python_environment_bootstrapper/req_package.txt....
+2025-11-28 06:01:16 - /home/testing/beejan_technology/python_projects/beejan_python_environment_bootstrapper/req_package.txt installed successfully!
+2025-11-28 06:01:16 - Setup completed successfully!!

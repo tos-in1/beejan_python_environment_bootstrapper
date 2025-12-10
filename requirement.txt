@@ -1,0 +1,10 @@
+
+pandas
+numpy>=2.0.0
+requests
+sqlalchemy
+psycopg2-binary
+python-dotenv
+boto3
+pyarrow
+pydantic

@@ -8,8 +8,9 @@ set -e
 DIRECTORY="$(pwd)"
 
 # >>>>>>>>>>>>>>>>>>> Create Log File In Directory <<<<<<<<<<<<<<<<<<
+mkdir -p $DIRECTORY/logs
 
-LOG_FILE="$DIRECTORY/setup.log" # this would create a new setup.log
+LOG_FILE="$DIRECTORY/logs/setup.log" # this would create a new setup.log
 
 # Defining color variables
 GREEN="\e[32m"
@@ -42,24 +43,22 @@ logging_msg() {
         echo "$(date '+%Y-%m-%d %H:%M:%S') [$LEVEL] $MESSAGE" >> "$LOG_FILE"
 }
 
-logging_msg INFO "Starting setup process......🔃"
-
-
 # >>>>>>>>>>>> Get Version  <<<<<<<<<<<<
 get_version() {
         # Version path 
         VERSION_FILE="$DIRECTORY/VERSION"
 
-        if [ -f "$VERSION_PATH" ]; then
+        if [ -f "$VERSION_FILE" ]; then
                 VERSION=$(cat "$VERSION_FILE")
         else
-                VERSION="unknown"
+                VERSION="v1.1"
+                echo "$VERSION" > "$VERSION_FILE"
         fi
 }
 
 get_version
 
-logging_msg "INFO" "Starting setup process  (v$VERSION)...🛠️"
+logging_msg "INFO" "Starting setup process..... Version: $VERSION...🛠️"
 
 # ======================================================================
 #                       STARTING STARTUP PROCESS
@@ -134,42 +133,11 @@ EOF
 }
 
 
-# >>>>>>>>>>>>>>>>>>> Create .gitignore File <<<<<<<<<<<<<<<<<<
-
-gitignore() {
-        GITIGNORE_FILE="$DIRECTORY/.gitignore"
-
-        # Checking if gitignore exists in the path directory
-        if [ -f "$GITIGNORE_FILE" ]; then
-                logging_msg "WARNING" ".gitignore already existed in $GITIGNORE_FILE"
-        else
-                logging_msg "INFO" "Creating .gitignore... 🔃"
-                cat <<EOF > "$GITIGNORE_FILE"
-# Python cache
-__pycache__/
-*.pyc
-
-# Virtual environment
-.venv/
-
-# Environment variable
-.env
-
-# package installation list
-req_package.txt
-
-EOF
-
-                logging_msg "SUCCESS" ".gitignore created successfully! ✅"
-        fi
-}
-
-
 # >>>>>>>>>>>>>>>>> Create Required Package List  <<<<<<<<<<<<<<<<<<
 
 req_package() {
 
-        REQ_FILE="$DIRECTORY/req_package.txt"
+        REQ_FILE="$DIRECTORY/requirement.txt"
 
 
         if [ -f "$REQ_FILE" ]; then
@@ -195,10 +163,39 @@ EOF
         fi
 }
 
+
+# >>>>>>>>>>>>>>>>>>> Create .gitignore File <<<<<<<<<<<<<<<<<<
+
+gitignore() {
+        GITIGNORE_FILE="$DIRECTORY/.gitignore"
+
+        # Checking if gitignore exists in the path directory
+        if [ -f "$GITIGNORE_FILE" ]; then
+                logging_msg "WARNING" ".gitignore already existed in $GITIGNORE_FILE"
+        else
+                logging_msg "INFO" "Creating .gitignore... 🔃"
+                cat <<EOF > "$GITIGNORE_FILE"
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
+
+# Environment variable
+.env
+
+EOF
+
+                logging_msg "SUCCESS" ".gitignore created successfully! ✅"
+        fi
+}
+
+
 # >>>>>>>>>>>>>>>>> Create Install Package Function  <<<<<<<<<<<<<<<<<<
 
 install_package() {
-        REQ_FILE="$DIRECTORY/req_package.txt"
+        REQ_FILE="$DIRECTORY/requirement.txt"
 
         if [ -f "$REQ_FILE" ]; then
                 logging_msg "INFO" "Installing packages from $REQ_FILE...."
