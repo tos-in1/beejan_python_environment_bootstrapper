@@ -3,38 +3,70 @@
 # If commands encounters any error, stop the scripts
 set -e
 
+# >>>>>>>>>>>>>>>>>>> Create Project Directory <<<<<<<<<<<<<<<<<<<
+
+DIRECTORY="$(pwd)"
+
+# >>>>>>>>>>>>>>>>>>> Create Log File In Directory <<<<<<<<<<<<<<<<<<
+
+LOG_FILE="$DIRECTORY/logs/setup.log" # this would create a new setup.log
+
 # Defining color variables
 GREEN="\e[32m"
 YELLOW="\e[33m"
 RED="\e[31m"
 BLUE="\e[34m"
+WHITE="\e[37m"
 RESET="\e[0m"
+
+# >>>>>>>>>>>>>>>>>>> Create unified CLI print / log message function <<<<<<<<<<<<<<<<<<
+
+logging_msg() {
+        local LEVEL=$1
+        local MESSAGE=$2
+        local COLOR
+
+        # Selecting colour based on level
+        case "$LEVEL" in
+                INFO) COLOR=$BLUE;;
+                SUCCESS) COLOR=$GREEN;;
+                WARNING) COLOR=$YELLOW;;
+                ERROR) COLOR=$RED;;
+                *) COLOR=$WHITE;;
+        esac
+
+        # CLI message
+        echo -e "${COLOR}[$LEVEL] $MESSAGE${RESET}"
+
+        # Append message to Log File
+        echo "$(date '+%Y-%m-%d %H:%M:%S') [$LEVEL] $MESSAGE" >> "$LOG_FILE"
+}
+
+logging_msg INFO "Starting setup process......🔃"
+
+
+# >>>>>>>>>>>> Get Version  <<<<<<<<<<<<
+get_version() {
+        # Version path 
+        VERSION_FILE="$DIRECTORY/VERSION"
+
+        if [ -f "$VERSION_PATH" ]; then
+                VERSION=$(cat "$VERSION_FILE")
+        else
+                VERSION="unknown"
+        fi
+}
+
+get_version
+
+logging_msg "INFO" "Starting setup process  (v$VERSION)...🛠️"
 
 # ======================================================================
 #                       STARTING STARTUP PROCESS
 # ======================================================================
 
-echo -e "${BLUE}Starting setup process......🔃${RESET}"
-
-
-# >>>>>>>>>>>>>>>>>>> Create Project Directory <<<<<<<<<<<<<<<<<<<
-
-DIRECTORY="$(pwd)"
-
-
-# >>>>>>>>>>>>>>>>>>> Create Log File In Directory <<<<<<<<<<<<<<<<<<
-
-LOG_FILE="$DIRECTORY/setup.log" # this would create a new setup.log
-
 
 # ==================== CREATE PROJECT FUNCTION ===================
-
-# >>>>>>>>>>>>>>>>>>> Create log message function <<<<<<<<<<<<<<<<<<
-
-logging_msg() {
-        echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$LOG_FILE"
-}
-
 
 # >>>>>>>>>>>> Create or activate virtual environment  <<<<<<<<<<<<
 
@@ -42,10 +74,10 @@ create_venv() {
         VENV_PATH="$DIRECTORY/.venv"
 
         if [ -d  $VENV_PATH ]; then
-                MESSAGE="Virtual environment $VENV_PATH already exists.. Activating..."
-                echo "$MESSAGE"
-                logging_msg "$MESSAGE"
-                source "$VENV_PATH/bin/activate" # Activating
+                logging_msg INFO "Virtual environment $VENV_PATH already exists.. Activating..."
+                
+                # Activating virtual envirinment
+                source "$VENV_PATH/bin/activate" 
         else
                 MESSAGE="Installing python package...."
                 echo -e "${YELLOW}$MESSAGE${RESET}"
