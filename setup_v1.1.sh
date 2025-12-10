@@ -74,35 +74,21 @@ create_venv() {
         VENV_PATH="$DIRECTORY/.venv"
 
         if [ -d  $VENV_PATH ]; then
-                logging_msg INFO "Virtual environment $VENV_PATH already exists.. Activating..."
+                logging_msg "WARNING" "Virtual environment $VENV_PATH already exists.. Activating..."
                 
                 # Activating virtual envirinment
                 source "$VENV_PATH/bin/activate" 
         else
-                MESSAGE="Installing python package...."
-                echo -e "${YELLOW}$MESSAGE${RESET}"
-                logging_msg "$MESSAGE"
+                logging_msg "INFO" "Creating python virtual environment...."
 
                 # Install venv package
                 sudo apt install -y python3.12-venv
-
-                # Creating the actual environment
-                MESSAGE="Creating venv environment"
-                echo -e "${YELLOW}$MESSAGE${RESET}"
-                logging_msg "$MESSAGE"
-
                 python3 -m venv "$VENV_PATH"
-
-                MESSAGE="Activating virtual environment ....."
-                echo -e "${YELLOW}$MESSAGE${RESET}"
-                logging_msg "$MESSAGE"
 
                 # Activate the newly created virtual environment
                 source "$VENV_PATH/bin/activate"
 
-                MESSAGE="Virtual environment created and activated"
-                echo -e "${GREEN}$MESSAGE${RESET}"
-                logging_msg "$MESSAGE"
+                logging_msg "SUCCESS" "Virtual environment created and activated! ✅"
         fi
 }
 
@@ -110,15 +96,9 @@ create_venv() {
 # >>>>>>>>>>>>>>>>>>> Upgrade or Install pip  <<<<<<<<<<<<<<<<<<<
 
 upgrade_pip() {
-        MESSAGE="Upgrading pip to the latest version....."
-        echo -e "${YELLOW}$MESSAGE${RESET}"
-        logging_msg "$MESSAGE"
-
+        logging_msg "INFO" "Upgrading pip to the latest version....."
         python3 -m pip install --upgrade pip
-
-        MESSAGE="pip was upgraded sucessfully"
-        echo -e "${GREEN}$MESSAGE${RESET}"
-        logging_msg "$MESSAGE"
+        logging_msg "SUCCESS" "pip was upgraded sucessfully"
 }
 
 
@@ -128,13 +108,10 @@ create_env() {
     ENV_FILE="$DIRECTORY/.env"
 
     if [ -f "$ENV_FILE" ]; then
-        MESSAGE=".env file already exists"
-        echo "$MESSAGE"
-        logging_msg "$MESSAGE"
+        logging_msg "WARNING" ".env file already exists"
     else
-        MESSAGE=".env successfully created!"
-        echo -e "${GREEN}$MESSAGE${RESET}"
-        logging_msg "$MESSAGE"
+        touch "$ENV_FILE"
+        logging_msg "SUCCESS" ".env successfully created!"
     fi
 }
 
@@ -145,18 +122,14 @@ create_readme() {
     README_FILE="$DIRECTORY/README.md"
 
     if [ -f "$README_FILE" ]; then
-        MESSAGE="README.md already exists"
-        echo "$MESSAGE"
-        logging_msg "$MESSAGE"
+        logging_msg "WARNING" "README.md already exists"
     else
         cat <<EOF > "$README_FILE"
 # New Python Project
 
 This readme file was automatically generated with setup.sh and all project descrition should be written here.
 EOF
-        MESSAGE="README.md created successfully!"
-        echo -e "${GREEN}$MESSAGE${RESET}"
-        logging_msg "$MESSAGE"
+        logging_msg "SUCCESS" "README.md created successfully!"
     fi
 }
 
@@ -168,13 +141,9 @@ gitignore() {
 
         # Checking if gitignore exists in the path directory
         if [ -f "$GITIGNORE_FILE" ]; then
-                MESSAGE=".gitignore already existed in $GITIGNORE_FILE"
-                echo "$MESSAGE"
-                logging_msg "$MESSAGE"
+                logging_msg "WARNING" ".gitignore already existed in $GITIGNORE_FILE"
         else
-                MESSAGE="Creating .gitignore..."
-                echo -e "${YELLOW}$MESSAGE${RESET}"
-                logging_msg "$MESSAGE"
+                logging_msg "INFO" "Creating .gitignore... 🔃"
                 cat <<EOF > "$GITIGNORE_FILE"
 # Python cache
 __pycache__/
@@ -191,9 +160,7 @@ req_package.txt
 
 EOF
 
-                MESSAGE=".gitignore created successfully!"
-                echo -e "${GREEN}$MESSAGE${RESET}"
-                logging_msg "$MESSAGE"
+                logging_msg "SUCCESS" ".gitignore created successfully! ✅"
         fi
 }
 
@@ -206,13 +173,10 @@ req_package() {
 
 
         if [ -f "$REQ_FILE" ]; then
-                MESSAGE="$REQ_FILE already exists..."
-                echo -e "$MESSAGE"
-                logging_msg "$MESSAGE"
+                logging_msg "WARNING" "$REQ_FILE already exists..."
         else
-                MESSAGE="Creating $REQ_FILE file"
-                echo -e "${YELLOW}$MESSAGE${RESET}"
-                logging_msg "$MESSAGE"
+                touch "$REQ_FILE"
+                logging_msg "INFO" "Creating $REQ_FILE file"
 
                 cat <<EOF > "$REQ_FILE"
 
@@ -224,9 +188,7 @@ psycopg2-binary
 python-dotenv
 EOF
 
-                MESSAGE="$REQ_FILE created successfully!"
-                echo -e "${GREEN}$MESSAGE${RESET}"
-                logging_msg "$MESSAGE"
+                logging_msg "SUCCESS" "$REQ_FILE created successfully! ✅"
         fi
 }
 
@@ -236,19 +198,12 @@ install_package() {
         REQ_FILE="$DIRECTORY/req_package.txt"
 
         if [ -f "$REQ_FILE" ]; then
-                MESSAGE="Installing packages from $REQ_FILE...."
-                echo -e "${YELLOW}$MESSAGE${RESET}"
-                logging_msg "$MESSAGE"
-
+                logging_msg "INFO" "Installing packages from $REQ_FILE...."
                 pip install -r "$REQ_FILE"
 
-                MESSAGE="$REQ_FILE installed successfully!"
-                echo "${GREEN}$MESSAGE${RESET}"
-                logging_msg "$MESSAGE"
+                logging_msg "SUCCESS" "$REQ_FILE installed successfully!"
         else
-                MESSAGE="$REQ_FILE not found. Skipping, no installation...."
-                echo -e "${RED}$MESSAGE${RESET}"
-                logging_msg "$MESSAGE"
+                logging_msg "ERROR" "$REQ_FILE not found. Skipping, no installation...."
         fi
 
 }
