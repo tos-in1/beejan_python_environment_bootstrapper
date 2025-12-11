@@ -81,7 +81,29 @@ create_venv() {
                 logging_msg "INFO" "Creating python virtual environment...."
 
                 # Install venv package
-                sudo apt install -y python3.12-venv
+                create_venv() {
+        VENV_PATH="$DIRECTORY/.venv"
+
+        if [ -d  $VENV_PATH ]; then
+                logging_msg "WARNING" "Virtual environment $VENV_PATH already exists.. Activating..."
+                
+                # Activating virtual envirinment
+                source "$VENV_PATH/bin/activate" 
+        else
+                logging_msg "INFO" "Creating python virtual environment...."
+
+                # Install venv package
+                apt-get update && apt-get install -y python3.12-venv
+                python3 -m venv "$VENV_PATH"
+                rm -rf /var/lib/apt/lists/*
+
+
+                # Activate the newly created virtual environment
+                source "$VENV_PATH/bin/activate"
+
+                logging_msg "SUCCESS" "Virtual environment created and activated! ✅"
+        fi
+}
                 python3 -m venv "$VENV_PATH"
 
                 # Activate the newly created virtual environment

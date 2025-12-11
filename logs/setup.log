@@ -1,12 +1,13 @@
-2025-12-10 23:35:58 [INFO] Starting setup process..... Version: v1.1...🛠️
-2025-12-10 23:35:58 [WARNING] Virtual environment /home/oluwatosin/beejan_tech/beejan_python_environment_bootstrapper/.venv already exists.. Activating...
-2025-12-10 23:35:58 [INFO] Upgrading pip to the latest version.....
-2025-12-10 23:35:59 [SUCCESS] pip was upgraded sucessfully
-2025-12-10 23:35:59 [WARNING] .env file already exists
-2025-12-10 23:35:59 [WARNING] README.md already exists
-2025-12-10 23:35:59 [WARNING] .gitignore already existed in /home/oluwatosin/beejan_tech/beejan_python_environment_bootstrapper/.gitignore
-2025-12-10 23:35:59 [WARNING] /home/oluwatosin/beejan_tech/beejan_python_environment_bootstrapper/requirement.txt already exists...
-2025-12-10 23:35:59 [INFO] Installing packages from /home/oluwatosin/beejan_tech/beejan_python_environment_bootstrapper/requirement.txt....
-2025-12-10 23:36:00 [SUCCESS] /home/oluwatosin/beejan_tech/beejan_python_environment_bootstrapper/requirement.txt installed successfully!
-2025-12-10 23:36:00 [SUCCESS] Setup completed successfully!! 🥳
-2025-12-10 23:36:00 [INFO] Logs saved to log file
+2025-12-11 01:06:12 [INFO] Starting setup process..... Version: v1.1...🛠️
+2025-12-11 01:06:12 [WARNING] Virtual environment /home/oluwatosin/beejan_tech/beejan_python_environment_bootstrapper/.venv already exists.. Activating...
+2025-12-11 01:06:12 [INFO] Upgrading pip to the latest version.....
+2025-12-11 01:06:13 [SUCCESS] pip was upgraded sucessfully
+2025-12-11 01:06:13 [WARNING] .env file already exists
+2025-12-11 01:06:13 [WARNING] README.md already exists
+2025-12-11 01:06:13 [WARNING] .gitignore already existed in /home/oluwatosin/beejan_tech/beejan_python_environment_bootstrapper/.gitignore
+2025-12-11 01:06:13 [INFO] Creating /home/oluwatosin/beejan_tech/beejan_python_environment_bootstrapper/requirement.txt file
+2025-12-11 01:06:13 [SUCCESS] /home/oluwatosin/beejan_tech/beejan_python_environment_bootstrapper/requirement.txt created successfully! ✅
+2025-12-11 01:06:13 [INFO] Installing packages from /home/oluwatosin/beejan_tech/beejan_python_environment_bootstrapper/requirement.txt....
+2025-12-11 01:06:14 [SUCCESS] /home/oluwatosin/beejan_tech/beejan_python_environment_bootstrapper/requirement.txt installed successfully!
+2025-12-11 01:06:14 [SUCCESS] Setup completed successfully!! 🥳
+2025-12-11 01:06:14 [INFO] Logs saved to log file
