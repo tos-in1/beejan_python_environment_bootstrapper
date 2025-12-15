@@ -1,0 +1,64 @@
+name: CI Pipeline
+
+on:
+    push:
+        branches: [ "main" ]
+    pull_request:
+        branches: [ "main" ]
+    workflow_dispatch:
+
+jobs:
+    # check the setup_v1.1 script
+    test-script:
+        
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Make shell script executable
+              run: chmod +x setup_v1.1.sh 
+
+            - name: Run the Setup script
+              run: ./setup_v1.1.sh
+
+    test-docker:
+        name: Test docker image build
+        runs-on: ubuntu-latest
+        needs: test-script
+
+        steps:
+            - name: Checkout repositoey
+              uses: actions/checkout@v4
+
+            - name: Build docker image
+              run: docker build -t beejan-setup:test .
+
+            - name: Verify that virtual environment exist
+              run: docker run --rm beejan-setup:test ls -la /vir-env
+       
+    publish-docker:
+        name: Publish Docker Image to Docker Hub
+        runs-on: ubuntu-latest
+        needs: test-docker
+        if: github.event_name == 'workflow_dispatch'
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Log in to Docker Hub
+              uses: docker/login-action@v3
+              with:
+                username: ${{ vars.DOCKERHUB_USERNAME }}
+                password: ${{ secrets.DOCKERHUB_TOKEN }}
+              
+            - name: Build Docker Image
+              run: |
+                docker build -t ${{ vars.DOCKERHUB_USERNAME }}/beejan-setup:v1.1 .
+
+            - name: Push Docker Image into Docker Hub
+              run: |
+                docker push ${{ vars.DOCKERHUB_USERNAME }}/beejan-setup:v1.1
+
