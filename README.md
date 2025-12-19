@@ -18,14 +18,18 @@ No more repetitive setup headaches!!
 
 ### Project Goal
 
-The goal of this project is to practice automating repetitive Python setup tasks.
+The goal of this project is to practice automating repetitive Python setup tasks using bash scripting, CI/CD and Docker.
 
-It shows how a simple bootstrap script can save time and ensure consistent environments across local, Docker, and CI workflows.
+It shows how a simple bootstrap script can save time and ensure consistent environments across local, Docker, and CI workflows
 
-### Project Structure
+### Notable Files
 
+- [`setup_v1.1.sh`](./setup_v1.1.sh) – Main bootstrap script  
+- [`Dockerfile`](./Dockerfile) – Docker image setup    
+- [`CI_pipeline.yml`](./.github/workflows/CI_pipeline.yml) – GitHub Action CI/CD workflow  
+- [`README.md`](./README.md) – Project documentation
 
-### How To Run The Script ([setup_v1.1.sh](./setup_v1.1.sh.sh))
+### How To Run The Script [setup_v1.1.sh](./setup_v1.1.sh)
 
 There are two ways to run the Beejan Python Environment Bootstrapper: Locally or using Docker.
 
@@ -64,7 +68,7 @@ There are two ways to run the Beejan Python Environment Bootstrapper: Locally or
 
 ### CI/CD integration
 
-This project uses GitHub Actions to implement a CI/CD workflow that ensures the reliability of the setup process as the project evolves ([GitHub workflow](./.gitHub/workflows)).
+This project uses GitHub Actions to implement a CI/CD workflow that ensures the reliability of the setup process as the project evolves ([GitHub workflow](./.github/workflows)).
 
 The pipeline:
 
@@ -72,4 +76,20 @@ The pipeline:
 - Builds and verifies the Docker image in a clean CI environment
 - Publishes Docker images manually via workflow dispatch after successful validation
 
-This approach gives room for continuous integration as the project evolves and at the same time makes sure that the Docker image release is intentionally gated, ensuring stability and controlled upgrades over time.
+This approach allows continuous integration as the project evolves, while ensuring Docker image releases are intentionally gated for stability and controlled upgrades.
+
+### Future Enhancements
+
+- Add shell linting in the CI pipeline to catch Bash errors and enforce best practices
+
+- Support multiple Python versions (e.g., 3.8, 3.9) for flexibility
+
+### 🛠️ Technologies Used
+Python, Bash, Docker, Linux, Git, GitHub Actions
+
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white&style=for-the-badge)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=Ubuntu&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+
