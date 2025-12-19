@@ -10,6 +10,8 @@ __pycache__/
 
 # package installation list
 req_package.txt
+requirement.txt
 
 # VERSION
 setup_v1.0.sh
+VERSION
