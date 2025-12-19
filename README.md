@@ -80,7 +80,7 @@ This approach allows continuous integration as the project evolves, while ensuri
 
 ### Future Enhancements
 
-- Add shell linting in the CI pipeline to catch Bash errors and enforce best practices
+- Add linting tests for bash scripts and dockerfile in the CI pipeline to catch erors and enforce best practices
 
 - Support multiple Python versions (e.g., 3.8, 3.9) for flexibility
 
